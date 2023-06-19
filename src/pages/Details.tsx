@@ -9,13 +9,17 @@ export const Details: React.FC = () => {
   const getActualDate = () => {
     const date = new Date();
     const day = date.getDate();
+    const formmatedDay = day < 10 ? `0${day}` : day;
     const month = date.getMonth() + 1;
+    const formmatdMonth = month < 10 ? `0${month}` : month;
     const year = date.getFullYear();
 
     const hours = date.getHours();
+    const formmatdHours = hours < 10 ? `0${hours}` : hours;
     const minutes = date.getMinutes();
+    const formmatedMinutes = minutes < 10 ? `0${minutes}` : minutes;
 
-    return `${day}/${month}/${year} | ${hours}:${minutes}`;
+    return `${formmatedDay}/${formmatdMonth}/${year} | ${formmatdHours}:${formmatedMinutes}`;
   };
   return (
     <Wrapper>
