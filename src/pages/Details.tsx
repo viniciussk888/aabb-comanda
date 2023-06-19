@@ -143,7 +143,7 @@ export const Details: React.FC = () => {
             marginBottom: 10,
           }}
         >
-          R$ 12,00
+          R$ 8,50
         </Label>
         <Label>Total:</Label>
         <Label
@@ -165,7 +165,7 @@ export const Details: React.FC = () => {
             color: "#f00",
           }}
         >
-          R$ 97,00
+          R$ 93,50
         </Label>
       </Column>
     </Wrapper>
