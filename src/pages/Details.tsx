@@ -136,63 +136,48 @@ export const Details: React.FC = () => {
         </ItemLabel>
       </Row>
       <Divider />
-      <Row>
+      <Column>
+        <Label>10%:</Label>
         <Label
           style={{
-            width: "30%",
-            maxWidth: "30%",
-          }}
-        >
-          10%
-        </Label>
-        <Label
-          style={{
-            width: "30%",
-            maxWidth: "30%",
-          }}
-        >
-          Total:
-        </Label>
-        <Label
-          style={{
-            width: "30%",
-            maxWidth: "30%",
-            color: "#f00",
-          }}
-        >
-          Total Geral:
-        </Label>
-      </Row>
-      <Row>
-        <Label
-          style={{
-            width: "30%",
-            maxWidth: "30%",
+            marginBottom: 10,
           }}
         >
           R$ 12,00
         </Label>
+        <Label>Total:</Label>
         <Label
           style={{
-            width: "30%",
-            maxWidth: "30%",
+            marginBottom: 10,
           }}
         >
           R$ 85,00
         </Label>
         <Label
           style={{
-            width: "30%",
-            maxWidth: "30%",
+            color: "#f00",
+          }}
+        >
+          Total Geral:
+        </Label>
+        <Label
+          style={{
             color: "#f00",
           }}
         >
           R$ 97,00
         </Label>
-      </Row>
+      </Column>
     </Wrapper>
   );
 };
+
+const Column = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 20px);
+  margin-top: 10px;
+`;
 
 const Wrapper = styled.div`
   flex: 1;
