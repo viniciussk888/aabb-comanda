@@ -137,7 +137,7 @@ export const Details: React.FC = () => {
       </Row>
       <Divider />
       <Column>
-        <Label>10%:</Label>
+        <Label>Taxa 10%:</Label>
         <Label
           style={{
             marginBottom: 10,
