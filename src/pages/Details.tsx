@@ -143,7 +143,7 @@ export const Details: React.FC = () => {
             maxWidth: "30%",
           }}
         >
-          Comissão:
+          10%
         </Label>
         <Label
           style={{
