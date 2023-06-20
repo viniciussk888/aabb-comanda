@@ -99,7 +99,7 @@ export const Details: React.FC = () => {
             maxWidth: "50%",
           }}
         >
-          Nome
+          Descrição
         </Label>
         <Label
           style={{
@@ -133,15 +133,16 @@ export const Details: React.FC = () => {
             style={{
               width: "50%",
               maxWidth: "50%",
-              fontSize: 13,
+              fontSize: 12,
             }}
           >
-            {item.codProduto?.slice(-3)} {item.descricao}
+            {item.codProduto?.slice(-3)}-{item.descricao}
           </ItemLabel>
           <ItemLabel
             style={{
               width: "10%",
               maxWidth: "10%",
+              marginLeft: 5,
             }}
           >
             {item.quantidade}
@@ -272,5 +273,5 @@ const Label = styled.label`
 
 const ItemLabel = styled.label`
   color: #222;
-  font-size: 0.9rem;
+  font-size: 12px;
 `;
