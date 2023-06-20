@@ -169,7 +169,12 @@ export const Details: React.FC = () => {
       <Divider />
       <Column>
         <Label>
-          Total Geral:{" "}
+          Total Geral:
+          <span
+            style={{
+              marginLeft: 1,
+            }}
+          />
           {formatCurrency(
             comandaMock.reduce((acc, item) => {
               return acc + item.vlTotal;
@@ -177,7 +182,12 @@ export const Details: React.FC = () => {
           )}
         </Label>
         <Label>
-          Taxa 10%:{" "}
+          Taxa 10%:
+          <span
+            style={{
+              marginLeft: 10,
+            }}
+          />
           {formatCurrency(
             comandaMock.reduce((acc, item) => {
               return acc + item.vlTotal;
@@ -189,7 +199,12 @@ export const Details: React.FC = () => {
             color: "#f00",
           }}
         >
-          Valor Total:{" "}
+          Valor Total:
+          <span
+            style={{
+              marginLeft: 3,
+            }}
+          />
           {formatCurrency(
             comandaMock.reduce((acc, item) => {
               return acc + item.vlTotal;

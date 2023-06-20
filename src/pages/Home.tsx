@@ -17,7 +17,8 @@ export const Home: React.FC = () => {
       <ButtonWrapper>
         <Input
           onChange={(e) => setTableNumber(e.target.value)}
-          placeholder="Número da mesa"
+          type="number"
+          placeholder="Mesa"
         />
         <Button
           onClick={handleClick}
@@ -72,7 +73,7 @@ export const ButtonWrapper = styled.div`
 `;
 
 const Input = styled.input`
-  width: 100%;
+  width: 15%;
   height: 40px;
   border-radius: 5px;
   border: 1px solid #013195;
@@ -88,10 +89,10 @@ const Input = styled.input`
 `;
 
 const Button = styled.button`
-  width: 100%;
-  height: 40px;
+  margin-top: 20px;
+  width: 80%;
+  height: 50px;
   border-radius: 5px;
-  border: 1px solid #013195;
   color: #fff;
   background-color: #013195;
   padding: 0 10px;
