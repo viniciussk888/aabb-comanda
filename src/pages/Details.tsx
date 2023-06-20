@@ -99,16 +99,16 @@ export const Details: React.FC = () => {
       <Row>
         <Label
           style={{
-            width: "40%",
-            maxWidth: "40%",
+            width: "50%",
+            maxWidth: "50%",
           }}
         >
           Nome
         </Label>
         <Label
           style={{
-            width: "20%",
-            maxWidth: "20%",
+            width: "10%",
+            maxWidth: "10%",
           }}
         >
           Qtd.
@@ -135,16 +135,17 @@ export const Details: React.FC = () => {
         <Row>
           <ItemLabel
             style={{
-              width: "40%",
-              maxWidth: "40%",
+              width: "50%",
+              maxWidth: "50%",
+              fontSize: 13,
             }}
           >
-            0{removeZerosBefore(item.codProduto)} - {item.descricao}
+            {item.codProduto} {item.descricao}
           </ItemLabel>
           <ItemLabel
             style={{
-              width: "20%",
-              maxWidth: "20%",
+              width: "10%",
+              maxWidth: "10%",
             }}
           >
             {item.quantidade}
@@ -275,5 +276,5 @@ const Label = styled.label`
 
 const ItemLabel = styled.label`
   color: #222;
-  font-size: 0%.8rem;
+  font-size: 0.9rem;
 `;
