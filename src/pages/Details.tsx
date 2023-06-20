@@ -74,7 +74,7 @@ export const Details: React.FC = () => {
             maxWidth: "40%",
           }}
         >
-          Coca cola zero
+          005 - Coca cola zero
         </ItemLabel>
         <ItemLabel
           style={{
@@ -108,7 +108,7 @@ export const Details: React.FC = () => {
             maxWidth: "40%",
           }}
         >
-          Cerveja Original
+          045 - Cerveja Original
         </ItemLabel>
         <ItemLabel
           style={{
