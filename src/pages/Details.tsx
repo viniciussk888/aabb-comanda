@@ -26,7 +26,7 @@ export const Details: React.FC = () => {
       <Logo src={aabbLogo} alt="AABB logo" />
       <Title>Bem vindo</Title>
       <Subtitle>
-        Confira abaixo os pedidos de sua comanda e o valor total
+        Confira abaixo os items de sua comanda e o valor total.
       </Subtitle>
       <Subtitle>
         MESA {tableNumber} - {getActualDate()}
@@ -190,7 +190,8 @@ const Wrapper = styled.div`
 `;
 
 const Logo = styled.img`
-  height: 40vmin;
+  width: 300px;
+  height: 100px;
   pointer-events: none;
 `;
 

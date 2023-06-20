@@ -44,7 +44,8 @@ const Wrapper = styled.div`
 `;
 
 const Logo = styled.img`
-  height: 40vmin;
+  width: 300px;
+  height: 100px;
   pointer-events: none;
 `;
 
