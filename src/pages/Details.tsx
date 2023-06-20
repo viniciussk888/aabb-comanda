@@ -59,10 +59,6 @@ const comandaMock = [
 export const Details: React.FC = () => {
   // get table number from url param
   const tableNumber = useParams<{ mesa: string }>().mesa;
-  const removeZerosBefore = (value: string) => {
-    const newValue = value.replace(/^0+/, "");
-    return newValue;
-  };
   const formatCurrency = (value: number) => {
     return value.toLocaleString("pt-br", {
       style: "currency",
