@@ -90,7 +90,7 @@ export const Details: React.FC = () => {
       <Logo src={aabbLogo} alt="AABB logo" />
       <Title>Bem vindo</Title>
       <Subtitle>
-        Confira abaixo os items de sua comanda e o valor total.
+        Confira abaixo os itens de sua comanda e o valor total.
       </Subtitle>
       <Subtitle>
         MESA {tableNumber} - {getActualDate()}
