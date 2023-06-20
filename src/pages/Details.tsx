@@ -136,7 +136,7 @@ export const Details: React.FC = () => {
               fontSize: 13,
             }}
           >
-            {item.codProduto} {item.descricao}
+            {item.codProduto?.slice(-3)} {item.descricao}
           </ItemLabel>
           <ItemLabel
             style={{
