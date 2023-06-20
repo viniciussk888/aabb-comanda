@@ -3,9 +3,73 @@ import aabbLogo from "../assets/logo.svg";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 
+const comandaMock = [
+  {
+    cemp: "01",
+    nroNota: "00000192",
+    codProduto: "000113",
+    quantidade: 1,
+    vlUnitario: 65,
+    vlTotal: 65,
+    descricao: "REFEICAO PEIXE FRITO",
+    totNota: 143,
+  },
+  {
+    cemp: "01",
+    nroNota: "00000192",
+    codProduto: "000001",
+    quantidade: 5,
+    vlUnitario: 8,
+    vlTotal: 40,
+    descricao: "CERVEJA BRAHMA 600 ML",
+    totNota: 143,
+  },
+  {
+    cemp: "01",
+    nroNota: "00000192",
+    codProduto: "000013",
+    quantidade: 3,
+    vlUnitario: 8,
+    vlTotal: 24,
+    descricao: "CERVEJA DEVASSA 600 ML",
+    totNota: 143,
+  },
+  {
+    cemp: "01",
+    nroNota: "00000192",
+    codProduto: "000138",
+    quantidade: 1,
+    vlUnitario: 8,
+    vlTotal: 8,
+    descricao: "PORCAO DE FEIJAO",
+    totNota: 143,
+  },
+  {
+    cemp: "01",
+    nroNota: "00000192",
+    codProduto: "000153",
+    quantidade: 1,
+    vlUnitario: 6,
+    vlTotal: 6,
+    descricao: "PORCAO DE MACARRAO",
+    totNota: 143,
+  },
+];
+
 export const Details: React.FC = () => {
   // get table number from url param
   const tableNumber = useParams<{ mesa: string }>().mesa;
+  const removeZerosBefore = (value: string) => {
+    const newValue = value.replace(/^0+/, "");
+    return newValue;
+  };
+  const formatCurrency = (value: number) => {
+    return value.toLocaleString("pt-br", {
+      style: "currency",
+      currency: "BRL",
+    });
+  };
+
   const getActualDate = () => {
     const date = new Date();
     const day = date.getDate();
@@ -67,74 +131,43 @@ export const Details: React.FC = () => {
         </Label>
       </Row>
       <Divider />
-      <Row>
-        <ItemLabel
-          style={{
-            width: "40%",
-            maxWidth: "40%",
-          }}
-        >
-          005 - Coca cola zero
-        </ItemLabel>
-        <ItemLabel
-          style={{
-            width: "20%",
-            maxWidth: "20%",
-          }}
-        >
-          1
-        </ItemLabel>
-        <ItemLabel
-          style={{
-            width: "20%",
-            maxWidth: "20%",
-          }}
-        >
-          R$ 5,00
-        </ItemLabel>
-        <ItemLabel
-          style={{
-            width: "20%",
-            maxWidth: "20%",
-          }}
-        >
-          R$ 5,00
-        </ItemLabel>
-      </Row>
-      <Row>
-        <ItemLabel
-          style={{
-            width: "40%",
-            maxWidth: "40%",
-          }}
-        >
-          045 - Cerveja Original
-        </ItemLabel>
-        <ItemLabel
-          style={{
-            width: "20%",
-            maxWidth: "20%",
-          }}
-        >
-          8
-        </ItemLabel>
-        <ItemLabel
-          style={{
-            width: "20%",
-            maxWidth: "20%",
-          }}
-        >
-          R$ 10,00
-        </ItemLabel>
-        <ItemLabel
-          style={{
-            width: "20%",
-            maxWidth: "20%",
-          }}
-        >
-          R$ 80,00
-        </ItemLabel>
-      </Row>
+      {comandaMock.map((item) => (
+        <Row>
+          <ItemLabel
+            style={{
+              width: "40%",
+              maxWidth: "40%",
+            }}
+          >
+            0{removeZerosBefore(item.codProduto)} - {item.descricao}
+          </ItemLabel>
+          <ItemLabel
+            style={{
+              width: "20%",
+              maxWidth: "20%",
+            }}
+          >
+            {item.quantidade}
+          </ItemLabel>
+          <ItemLabel
+            style={{
+              width: "20%",
+              maxWidth: "20%",
+            }}
+          >
+            {formatCurrency(item.vlUnitario)}
+          </ItemLabel>
+          <ItemLabel
+            style={{
+              width: "20%",
+              maxWidth: "20%",
+            }}
+          >
+            {formatCurrency(item.vlTotal)}
+          </ItemLabel>
+        </Row>
+      ))}
+
       <Divider />
       <Column>
         <Label>Taxa 10%:</Label>
@@ -143,7 +176,11 @@ export const Details: React.FC = () => {
             marginBottom: 10,
           }}
         >
-          R$ 8,50
+          {formatCurrency(
+            comandaMock.reduce((acc, item) => {
+              return acc + item.vlTotal;
+            }, 0) * 0.1
+          )}
         </Label>
         <Label>Total:</Label>
         <Label
@@ -151,7 +188,11 @@ export const Details: React.FC = () => {
             marginBottom: 10,
           }}
         >
-          R$ 85,00
+          {formatCurrency(
+            comandaMock.reduce((acc, item) => {
+              return acc + item.vlTotal;
+            }, 0)
+          )}
         </Label>
         <Label
           style={{
@@ -165,7 +206,11 @@ export const Details: React.FC = () => {
             color: "#f00",
           }}
         >
-          R$ 93,50
+          {formatCurrency(
+            comandaMock.reduce((acc, item) => {
+              return acc + item.vlTotal;
+            }, 0) * 1.1
+          )}
         </Label>
       </Column>
     </Wrapper>
