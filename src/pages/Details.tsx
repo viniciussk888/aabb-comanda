@@ -17,6 +17,7 @@ type Comanda = {
   descricao: string;
   totNota: number;
 };
+const BASE_URL = import.meta.env.VITE_API_URL;
 
 export const Details: React.FC = () => {
   const [command, setCommand] = useState<Comanda[]>([]);
@@ -33,7 +34,7 @@ export const Details: React.FC = () => {
   const handleGetCommand = async () => {
     try {
       const { data } = await axios.get(
-        `http://ip.nscinterno.com.br:60086/nsc/xdata/NscService/RetornarItensComandaBar?cemp=01&mesa=${tableNumber}`
+        `${BASE_URL}/RetornarItensComandaBar?cemp=01&mesa=${tableNumber}`
       );
       setCommand(data);
     } catch (error) {
