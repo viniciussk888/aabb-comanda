@@ -1,63 +1,27 @@
-import React from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useState } from "react";
 import aabbLogo from "../assets/logo.svg";
+import LoadingAnimation from "../assets/loading.gif";
+import ErrorAnimation from "../assets/error.gif";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
+import axios from "axios";
 
-const comandaMock = [
-  {
-    cemp: "01",
-    nroNota: "00000192",
-    codProduto: "000113",
-    quantidade: 1,
-    vlUnitario: 65,
-    vlTotal: 65,
-    descricao: "REFEICAO PEIXE FRITO",
-    totNota: 143,
-  },
-  {
-    cemp: "01",
-    nroNota: "00000192",
-    codProduto: "000001",
-    quantidade: 5,
-    vlUnitario: 8,
-    vlTotal: 40,
-    descricao: "CERVEJA BRAHMA 600 ML",
-    totNota: 143,
-  },
-  {
-    cemp: "01",
-    nroNota: "00000192",
-    codProduto: "000013",
-    quantidade: 3,
-    vlUnitario: 8,
-    vlTotal: 24,
-    descricao: "CERVEJA DEVASSA 600 ML",
-    totNota: 143,
-  },
-  {
-    cemp: "01",
-    nroNota: "00000192",
-    codProduto: "000138",
-    quantidade: 1,
-    vlUnitario: 8,
-    vlTotal: 8,
-    descricao: "PORCAO DE FEIJAO",
-    totNota: 143,
-  },
-  {
-    cemp: "01",
-    nroNota: "00000192",
-    codProduto: "000153",
-    quantidade: 1,
-    vlUnitario: 6,
-    vlTotal: 6,
-    descricao: "PORCAO DE MACARRAO",
-    totNota: 143,
-  },
-];
+type Comanda = {
+  cemp: string;
+  nroNota: string;
+  codProduto: string;
+  quantidade: number;
+  vlUnitario: number;
+  vlTotal: number;
+  descricao: string;
+  totNota: number;
+};
 
 export const Details: React.FC = () => {
-  // get table number from url param
+  const [command, setCommand] = useState<Comanda[]>([]);
+  const [error, setError] = useState(false); // TODO: handle error
+  const [loading, setLoading] = useState(true);
   const tableNumber = useParams<{ mesa: string }>().mesa;
   const formatCurrency = (value: number) => {
     return value.toLocaleString("pt-br", {
@@ -65,6 +29,24 @@ export const Details: React.FC = () => {
       currency: "BRL",
     });
   };
+
+  const handleGetCommand = async () => {
+    try {
+      const { data } = await axios.get(
+        `http://ip.nscinterno.com.br:60086/nsc/xdata/NscService/RetornarItensComandaBar?cemp=01&mesa=${tableNumber}`
+      );
+      setCommand(data);
+    } catch (error) {
+      setError(true);
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    handleGetCommand();
+  }, [tableNumber, handleGetCommand]);
 
   const getActualDate = () => {
     const date = new Date();
@@ -81,6 +63,45 @@ export const Details: React.FC = () => {
 
     return `${formmatedDay}/${formmatdMonth}/${year} | ${formmatdHours}:${formmatedMinutes}`;
   };
+
+  if (loading)
+    return (
+      <Wrapper
+        style={{
+          justifyContent: "center",
+        }}
+      >
+        <Logo
+          style={{
+            width: 100,
+            height: 100,
+          }}
+          src={LoadingAnimation}
+          alt="Carregando..."
+        />
+      </Wrapper>
+    );
+
+  if (error)
+    return (
+      <Wrapper
+        style={{
+          justifyContent: "center",
+        }}
+      >
+        <Logo
+          style={{
+            width: 100,
+            height: 100,
+          }}
+          src={ErrorAnimation}
+          alt="Error..."
+        />
+        <Title>
+          Ocorreu um erro ao carregar a comanda, por favor tente novamente
+        </Title>
+      </Wrapper>
+    );
   return (
     <Wrapper>
       <Logo src={aabbLogo} alt="AABB logo" />
@@ -99,7 +120,7 @@ export const Details: React.FC = () => {
             maxWidth: "50%",
           }}
         >
-          Descrição
+          Código Produtos
         </Label>
         <Label
           style={{
@@ -115,7 +136,7 @@ export const Details: React.FC = () => {
             maxWidth: "20%",
           }}
         >
-          Valor
+          Preço
         </Label>
         <Label
           style={{
@@ -123,11 +144,11 @@ export const Details: React.FC = () => {
             maxWidth: "20%",
           }}
         >
-          Sub total
+          Valor
         </Label>
       </Row>
       <Divider />
-      {comandaMock.map((item) => (
+      {command.map((item) => (
         <Row>
           <ItemLabel
             style={{
@@ -169,27 +190,17 @@ export const Details: React.FC = () => {
       <Divider />
       <Column>
         <Label>
-          Total Geral:
-          <span
-            style={{
-              marginLeft: 1,
-            }}
-          />
+          Consumo..
           {formatCurrency(
-            comandaMock.reduce((acc, item) => {
+            command.reduce((acc, item) => {
               return acc + item.vlTotal;
             }, 0)
           )}
         </Label>
         <Label>
-          Taxa 10%:
-          <span
-            style={{
-              marginLeft: 10,
-            }}
-          />
+          Serviço.....
           {formatCurrency(
-            comandaMock.reduce((acc, item) => {
+            command.reduce((acc, item) => {
               return acc + item.vlTotal;
             }, 0) * 0.1
           )}
@@ -199,19 +210,25 @@ export const Details: React.FC = () => {
             color: "#f00",
           }}
         >
-          Valor Total:
-          <span
-            style={{
-              marginLeft: 3,
-            }}
-          />
+          Valor Total.
           {formatCurrency(
-            comandaMock.reduce((acc, item) => {
+            command.reduce((acc, item) => {
               return acc + item.vlTotal;
             }, 0) * 1.1
           )}
         </Label>
       </Column>
+      <Title
+        style={{
+          marginTop: 100,
+          padding: 20,
+          fontSize: 14,
+          textAlign: "center",
+        }}
+      >
+        Desenvolvido Por Nsc Sistemas Ltda - www.nscsistemas.com.br - 99
+        3221-8282
+      </Title>
     </Wrapper>
   );
 };
