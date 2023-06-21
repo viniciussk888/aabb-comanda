@@ -17,7 +17,7 @@ type Comanda = {
   descricao: string;
   totNota: number;
 };
-const BASE_URL = import.meta.env.VITE_API_URL;
+const BASE_URL = "http://ip.nscinterno.com.br:60086/nsc/xdata/NscService";
 
 export const Details: React.FC = () => {
   const [command, setCommand] = useState<Comanda[]>([]);
