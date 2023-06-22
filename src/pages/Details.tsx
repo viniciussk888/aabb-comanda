@@ -18,6 +18,11 @@ type Comanda = {
   totNota: number;
 };
 const BASE_URL = "https://aabb.voceatende.com.br/nsc/xdata/NscService";
+const username = "Nsc_";
+const password = "Aabb270213!@#";
+
+const authString = `${username}:${password}`;
+const encodedAuthString = Buffer.from(authString).toString("base64");
 
 export const Details: React.FC = () => {
   const [command, setCommand] = useState<Comanda[]>([]);
@@ -34,7 +39,12 @@ export const Details: React.FC = () => {
   const handleGetCommand = async () => {
     try {
       const { data } = await axios.get(
-        `${BASE_URL}/RetornarItensComandaBar?cemp=01&mesa=${tableNumber}`
+        `${BASE_URL}/RetornarItensComandaBar?cemp=01&mesa=${tableNumber}`,
+        {
+          headers: {
+            Authorization: `Basic ${encodedAuthString}`,
+          },
+        }
       );
       setCommand(data);
     } catch (error) {
