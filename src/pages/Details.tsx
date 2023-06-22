@@ -17,7 +17,7 @@ type Comanda = {
   descricao: string;
   totNota: number;
 };
-const BASE_URL = "http://ip.nscinterno.com.br:60086/nsc/xdata/NscService";
+const BASE_URL = "https://aabb.voceatende.com.br/nsc/xdata/NscService";
 
 export const Details: React.FC = () => {
   const [command, setCommand] = useState<Comanda[]>([]);
