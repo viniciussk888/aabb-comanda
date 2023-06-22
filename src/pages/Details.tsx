@@ -6,6 +6,8 @@ import ErrorAnimation from "../assets/error.gif";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import Base64 from "base-64";
+
 type Comanda = {
   cemp: string;
   nroNota: string;
@@ -19,7 +21,6 @@ type Comanda = {
 const BASE_URL = "https://aabb.voceatende.com.br/nsc/xdata/NscService";
 const username = "Nsc_";
 const password = "Aabb270213!@#";
-import Base64 from "base-64";
 
 const authString = `${username}:${password}`;
 
