@@ -202,34 +202,77 @@ export const Details: React.FC = () => {
 
       <Divider />
       <Column>
-        <Label>
-          Consumo..
-          {formatCurrency(
-            command.reduce((acc, item) => {
-              return acc + item.vlTotal;
-            }, 0)
-          )}
-        </Label>
-        <Label>
-          Serviço.....
-          {formatCurrency(
-            command.reduce((acc, item) => {
-              return acc + item.vlTotal;
-            }, 0) * 0.1
-          )}
-        </Label>
-        <Label
+        <Row
           style={{
-            color: "#f00",
+            justifyContent: "flex-start",
           }}
         >
-          Valor Total.
-          {formatCurrency(
-            command.reduce((acc, item) => {
-              return acc + item.vlTotal;
-            }, 0) * 1.1
-          )}
-        </Label>
+          <div
+            style={{
+              width: 100,
+            }}
+          >
+            <Label>Consumo:</Label>
+          </div>
+          <Label>
+            {formatCurrency(
+              command.reduce((acc, item) => {
+                return acc + item.vlTotal;
+              }, 0)
+            )}
+          </Label>
+        </Row>
+        <Row
+          style={{
+            justifyContent: "flex-start",
+          }}
+        >
+          <div
+            style={{
+              width: 100,
+            }}
+          >
+            <Label>Serviço:</Label>
+          </div>
+          <Label>
+            {formatCurrency(
+              command.reduce((acc, item) => {
+                return acc + item.vlTotal;
+              }, 0) * 0.1
+            )}
+          </Label>
+        </Row>
+        <Row
+          style={{
+            justifyContent: "flex-start",
+          }}
+        >
+          <div
+            style={{
+              width: 100,
+            }}
+          >
+            <Label
+              style={{
+                color: "#f00",
+              }}
+            >
+              {" "}
+              Valor Total:
+            </Label>
+          </div>
+          <Label
+            style={{
+              color: "#f00",
+            }}
+          >
+            {formatCurrency(
+              command.reduce((acc, item) => {
+                return acc + item.vlTotal;
+              }, 0) * 1.1
+            )}
+          </Label>
+        </Row>
       </Column>
       <Title
         style={{
@@ -239,8 +282,8 @@ export const Details: React.FC = () => {
           textAlign: "center",
         }}
       >
-        Desenvolvido Por Nsc Sistemas Ltda - www.nscsistemas.com.br - 99
-        3221-8282
+        Copyright {new Date().getFullYear()} Nsc Sistemas Ltda -
+        www.nscsistemas.com.br - Suporte Técnico: 99 3221-8282
       </Title>
     </Wrapper>
   );
