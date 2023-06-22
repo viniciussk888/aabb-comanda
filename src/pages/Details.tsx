@@ -32,7 +32,7 @@ export const Details: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const tableNumber = useParams<{ mesa: string }>().mesa;
   const formatCurrency = (value: number) => {
-    return value.toLocaleString("pt-br", {
+    return value?.toLocaleString("pt-br", {
       style: "currency",
       currency: "BRL",
     });
@@ -59,7 +59,7 @@ export const Details: React.FC = () => {
 
   useEffect(() => {
     handleGetCommand();
-  }, [tableNumber, handleGetCommand]);
+  }, []);
 
   const getActualDate = () => {
     const date = new Date();
