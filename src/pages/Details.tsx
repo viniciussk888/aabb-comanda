@@ -133,7 +133,7 @@ export const Details: React.FC = () => {
             maxWidth: "50%",
           }}
         >
-          Código Produtos
+          Código Produto
         </Label>
         <Label
           style={{
