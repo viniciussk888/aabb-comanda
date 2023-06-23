@@ -28,8 +28,11 @@ const encodedAuthString = Base64.encode(authString);
 
 export const Details: React.FC = () => {
   const [command, setCommand] = useState<Comanda[]>([]);
-  const [error, setError] = useState(false); // TODO: handle error
+  const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState(
+    "  Ocorreu um erro ao carregar a comanda, por favor tente novamente."
+  );
   const tableNumber = useParams<{ mesa: string }>().mesa;
   const formatCurrency = (value: number) => {
     return value?.toLocaleString("pt-br", {
@@ -49,9 +52,17 @@ export const Details: React.FC = () => {
         }
       );
       setCommand(data);
-    } catch (error) {
-      setError(true);
+    } catch (error: any) {
       console.log(error);
+      setError(true);
+      if (
+        error?.response?.data?.error?.message ===
+        "Não existem dados para mostrar!"
+      ) {
+        setErrorMessage(
+          "Não foi encontrado comanda para a mesa informada, por favor tente novamente."
+        );
+      }
     } finally {
       setLoading(false);
     }
@@ -110,9 +121,7 @@ export const Details: React.FC = () => {
           src={ErrorAnimation}
           alt="Error..."
         />
-        <Title>
-          Ocorreu um erro ao carregar a comanda, por favor tente novamente
-        </Title>
+        <Title>{errorMessage}</Title>
       </Wrapper>
     );
   return (
