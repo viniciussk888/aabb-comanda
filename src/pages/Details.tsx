@@ -84,8 +84,10 @@ export const Details: React.FC = () => {
     const formmatdHours = hours < 10 ? `0${hours}` : hours;
     const minutes = date.getMinutes();
     const formmatedMinutes = minutes < 10 ? `0${minutes}` : minutes;
+    const seconds = date.getSeconds();
+    const formmatedSeconds = seconds < 10 ? `0${seconds}` : seconds;
 
-    return `${formmatedDay}/${formmatdMonth}/${year} | ${formmatdHours}:${formmatedMinutes}`;
+    return `${formmatedDay}/${formmatdMonth}/${year} | ${formmatdHours}:${formmatedMinutes}:${formmatedSeconds}`;
   };
 
   if (loading)
@@ -129,7 +131,7 @@ export const Details: React.FC = () => {
       <Logo src={aabbLogo} alt="AABB logo" />
       <Title>Bem vindo</Title>
       <Subtitle>
-        Confira abaixo os itens de sua comanda e o valor total.
+        Confira abaixo os produtos de sua comanda e o valor total.
       </Subtitle>
       <Subtitle>
         MESA {tableNumber} - {getActualDate()}
@@ -291,8 +293,9 @@ export const Details: React.FC = () => {
           textAlign: "center",
         }}
       >
-        Copyright {new Date().getFullYear()} Nsc Sistemas Ltda -
-        www.nscsistemas.com.br - Suporte Técnico: 99 3221-8282
+        Copyright {new Date().getFullYear()} Nsc Sistemas Ltda<br />
+        www.nscsistemas.com.br<br />
+        Suporte Técnico: 99 3221-8282
       </Title>
     </Wrapper>
   );
